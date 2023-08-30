@@ -1,6 +1,6 @@
 import React ,{ useState, useEffect, createRef} from 'react';
 
-import { CircularProgress, Grid, Typography, InputLabel, MenuItem , FormControl, Select } from '@material-ui/core';
+import { CircularProgress, Grid, Typography, InputLabel, MenuItem , FormControl, Select } from '@mui/material';
 import useStyles from './styles';
 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
@@ -31,18 +31,21 @@ const List = ({ places, ChildClicked, isLoading,type,setType, rating, setRating}
                 </div>    
             ) : (
                 <>
-            <FormControl className={classes.formControl}>
+            <FormControl variant="standard" className={classes.formControl}>
                 <InputLabel>Type</InputLabel>
-                <Select value={type} onChange={(e)=> setType(e.target.value)}>
+                <Select variant="standard" value={type} onChange={(e)=> setType(e.target.value)}>
                     <MenuItem value="restaurants">Restaurants</MenuItem>
                     <MenuItem value="Hotels">Hotels</MenuItem>
                     <MenuItem value="attractions">Attractions</MenuItem>
 
                 </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl variant="standard" className={classes.formControl}>
                 <InputLabel>Rating</InputLabel>
-                <Select value={rating} onChange={(e)=> setRating(e.target.value)}>
+                <Select
+                    variant="standard"
+                    value={rating}
+                    onChange={(e)=> setRating(e.target.value)}>
                     <MenuItem value={0}>ALL</MenuItem>
                     <MenuItem value={3}>Above 3.0</MenuItem>
                     <MenuItem value={4}>Above 4.0</MenuItem>

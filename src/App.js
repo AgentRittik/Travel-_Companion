@@ -1,5 +1,7 @@
 import React, {useState, useEffect } from 'react';
-import { CssBaseline, Grid } from '@material-ui/core';
+import { CssBaseline, Grid } from '@mui/material';
+import {ThemeProvider} from '@mui/styles';
+import {createTheme} from '@mui/material';
 
 import { getPlacesData } from './api';
 
@@ -21,8 +23,11 @@ const App = () => {
     useEffect(() => {      // to automatically get the current location of the user in the starting. so we don't need to manually change the coordinates
         navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
             setCoordinates({lat: latitude, lng: longitude});
-        })
+            console.log('vishal' , coordinates.lat);
+        });
     }, []);//only work once at the starting of page loding
+    
+    
 
     useEffect(() => {
         const filteredPlaces = places.filter((place) => place.rating > rating);
@@ -35,9 +40,10 @@ const App = () => {
     
 
     useEffect(() => {
+        console.log('hii' , bounds.sw , bounds.ne);
         if(bounds.sw && bounds.ne){
             setIsLoading(true);
-            console.log(coordinates, bounds);
+            console.log("cood" ,bounds);
             getPlacesData(type, bounds.sw, bounds.ne)
                 .then((data) => {
                         setPlaces(data.filter((place) => place.name && place.num_reviews >0));
@@ -46,9 +52,12 @@ const App = () => {
                 })
         }    
     }, [type ,bounds]);  // the empty array means that this useEffect will only run once at the start of application
-                                // if we want to change the coordinates and bounds every time we change map , we need to add them to the array
+    //                             // if we want to change the coordinates and bounds every time we change map , we need to add them to the array
+
+    const theme = createTheme()
+                            
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header setCoordinates ={setCoordinates}/>
             <Grid container spacing={3} styles={{ width: '100%' }}>
@@ -74,7 +83,7 @@ const App = () => {
                     />
                 </Grid>
             </Grid>
-        </>
+        </ThemeProvider>
     );
 }
 

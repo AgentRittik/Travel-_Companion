@@ -1,8 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 export default makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1), minWidth: 120, marginBottom: '30px',
+    margin: theme.spacing(5), minWidth: 150, marginBottom: '30px',marginRight: '20px'
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
